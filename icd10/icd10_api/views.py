@@ -2,8 +2,6 @@ from .models import Code
 from .serializer import CodeSerializer
 from rest_framework import generics, mixins, permissions
 
-# from rest_framework.response import Response
-
 # Create your views here.
 
 
