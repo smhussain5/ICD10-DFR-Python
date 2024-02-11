@@ -1,0 +1,1 @@
+web: gunicorn icd10.wsgi
