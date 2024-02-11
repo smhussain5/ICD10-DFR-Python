@@ -1,6 +1,6 @@
 from .models import Code
 from .serializer import CodeSerializer
-from rest_framework import generics, mixins, permissions
+from rest_framework import filters, generics, mixins, permissions
 
 # Create your views here.
 
@@ -9,6 +9,10 @@ class AllCodes(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListMode
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Code.objects.all()
     serializer_class = CodeSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["=icd10_code", "category", "diagnosis"]
+    ordering_fields = ["icd10_code", "category", "diagnosis"]
+    ordering = ["icd10_code"]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
